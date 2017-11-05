@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../static/lib/jquery-1.8.3.min.js"></script>
+    <script src="../static/lib/highcharts-zh_CN.js"></script>
+    <script src="../static/lib/exporting.js"></script>
+    <script src="../static/lib/highcharts.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<table  border="1" cellpadding="0" cellspacing="0" style="border-color: #ebebeb">
+								<tr>
+									<th style="width: 100px">系统名称：</th>
+									<td style="width: 200px">安信&reg;运维管理控制系统</td>
+									<th style="width: 100px">版本：</th>
+									<td>1.0.2017.9f</td>
+								</tr>
+								<tr>
+									<th>系统警报：</th>
+									    <td>
+											<a href="/index/">0条未确认警报</a>
+                                        </td>
+									<th>运行时长：</th>
+									    <td>21天22小时46分50秒</td>
+								</tr>
+								<tr>
+									<th>IP地址：</th>
+									<td>192.168.6.250</td>
+									<th>远程认证：</th>
+									<td>关闭</td>
+								</tr>
+</table>
+
+<hr>
+
+
+<div id="container" style="width: 30%;height: 300px;"></div>
+<script type="text/javascript">
+ var data = '{{local_data|tojson}}';
+
+$(function () {
+        $('#container').highcharts({
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: '本机内存使用率走势图'
+            },
+//            subtitle: {
+//                text: document.ontouchstart === undefined ?
+//                '鼠标拖动可以进行缩放' : '手势操作进行缩放'
+//            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    millisecond: '%H:%M:%S.%L',
+                    second: '%H:%M:%S',
+                    minute: '%H:%M',
+                    hour: '%H:%M',
+                    day: '%m-%d',
+                    week: '%m-%d',
+                    month: '%Y-%m',
+                    year: '%Y'
+                }
+            },
+            tooltip: {
+                dateTimeLabelFormats: {
+                    millisecond: '%H:%M:%S.%L',
+                    second: '%H:%M:%S',
+                    minute: '%H:%M',
+                    hour: '%H:%M',
+                    day: '%Y-%m-%d',
+                    week: '%m-%d',
+                    month: '%Y-%m',
+                    year: '%Y'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: '本机内存使用率'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
+            series: [{
+                type: 'area',
+                name: '内存使用率',
+                data: (eval(data))
+            }]
+        });
+});
+</script>
+
+</body>
+</html>

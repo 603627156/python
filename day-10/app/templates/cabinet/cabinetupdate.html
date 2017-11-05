@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block breadcrumb %} 
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+     <br />
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">仪表盘</a>
+            </li>
+            <li>
+                <a href="/cabinetupdate/">
+                机柜更新
+                </a>
+            </li>
+        </ol>
+    </div>
+</div><!--右边导航结束-->
+{% endblock %}
+
+{% block content %} 
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+	<div class="col-sm-10">
+	    <div class="ibox float-e-margins">
+		<div class="ibox-title">
+		    <h5>填写基本信息</h5>
+		<div class="ibox-tools">
+			<a class="collapse-link">
+			    <i class="fa fa-chevron-up"></i>
+			</a>
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			    <i class="fa fa-wrench"></i>
+			</a>
+			<a class="close-link">
+			    <i class="fa fa-times"></i>
+			</a>
+        </div>
+       </div>   
+	<div class="ibox-content">  
+    <form  id="updateForm" class="form-horizontal">
+		<input id='id' type='hidden' name='id' value= {{cabinet.id}} readonly='true'>
+
+	    <div class='form-group'>
+                <label for="name" class="col-sm-3 control-label">机柜名<span class="red-fonts">*</span></label>
+                <div class="col-sm-7">
+                    <input id="name" name="name" value={{cabinet.name}} type="text" class="form-control" >
+                </div>
+	    </div> <!--name-->
+	    <div class="hr-line-dashed"></div>
+		<div class="form-group">
+			  <label for="idc_id" class="col-sm-3 control-label">所在机房</label>
+			  <div class="col-sm-8">
+			  <select id='idc_id' name="idc_id"  class='multiselect dropdown-toggle btn btn-default'>
+                        {% for idc in  idcs %}
+                           {% if cabinet.idc_id == idc.id %}
+                            <option  value="{{ idc.id }}" selected="selected">{{ idc.name }}</option>
+                           {% else %}
+                                <option  value="{{ idc.id }}" >{{ idc.name }}</option>
+                           {% endif %}
+                        {% endfor %}
+		      </select>
+			  </div>
+	    </div><!--idc-->
+	    <div class="hr-line-dashed"></div>
+	    <div class="form-group">
+			    <label for="u_num" class="col-sm-3 control-label">U位</label>
+			    <div class="col-sm-8">
+				<input id="u_num" name="u_num" value="{{cabinet.u_num}}" type="text" class="form-control" >
+			    </div>
+		</div><!--U位-->
+		<div class="hr-line-dashed"></div>
+		<div class="form-group">
+			    <label for="power" class="col-sm-3 control-label">电量</label>
+			    <div class="col-sm-8">
+				<input id="power" name="power" value="{{cabinet.power}}" type="text" class="form-control" >
+			    </div> 
+		</div> <!--电量-->
+		<div class="hr-line-dashed"></div>
+		<div class="form-group">
+			    <div class="col-sm-6 col-sm-offset-2">
+				<button id="submit_button" class="btn btn-primary">确认更新</button>
+				<button class="btn btn-white" type="reset">重置</button>
+			    </div>
+		</div>
+	</form> <!--form-->
+ </div> <!--ibox-content-->
+</div>  <!---->
+</div><!---->
+
+<script>
+$("#submit_button").click(function(){
+	$.post("/cabinetupdate/",$("#updateForm").serialize(),function(data){
+	    console.log(data)
+	    data=JSON.parse(data);
+	    if(data["code"] == 0){
+		swal({
+		    title:'Congratulation',
+		    text:data['result'],
+		    type:'success',
+		    confirmButtonText:'确定'
+		    },function(){
+			location.href='/cabinet/'
+		    })
+	    }else{
+		swal('Error',data['errmsg'],'error')
+	    }
+	})
+    return false
+})
+</script>
+{% endblock %}

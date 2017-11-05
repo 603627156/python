@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="author" content="Yeeku.H.Lee(CrazyIt.org)" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> 本地数据分页 </title>
+	<!-- 导入Ext JS必需的CSS样式单 -->
+	<link href="../../static/extjs/resources/css/ext-all.css" rel="stylesheet" type="text/css" />
+	<!-- 导入Ext JS必需的JavaScript库 -->
+	<script type="text/javascript" src="../../static/extjs/ext-all.js">
+	</script>
+	<!-- 导入Ext JS国际化所需的JavaScript库 -->
+	<script type="text/javascript" src="../../static/extjs/ext-lang-zh_CN.js">
+	</script>
+	<!-- 导入对本地数据进行分页所需的JavaScript库 -->
+	<script type="text/javascript" src="../../static/PagingMemoryProxy.js">
+	</script>
+</head>
+<body>
+<script type="text/javascript">
+	var x = '{{resault|tojson}}';
+Ext.onReady(function(){
+	// 定义本地数据
+	var data = {
+		users:eval(x)
+		//total:10
+	};
+	var userStore = Ext.create('Ext.data.Store',
+	{
+		// 指定Store包含的记录所包含的字段
+		fields:['id' , 'name', 'email','tt','ttt'],
+		pageSize: 10, // 指定每页显示2条记录
+		// 使用proxy指定加载本地数据
+		proxy: {
+			type: 'pagingmemory', // 指定使用PagingMemoryProxy控制读取内存数据
+			data: data,
+			reader: {
+				type: 'json',
+				root: 'users', // 直接读取users数据
+				totalProperty: 'total' // total属性值代表了总记录条数
+			}
+		},
+		autoLoad: true // 指定自动加载
+	});
+	Ext.create('Ext.grid.Panel', {
+		title: '员工信息',
+		store: userStore,
+		columns: [
+				//////////////////////////////////////////////数据字段
+			{ header: 'ID', dataIndex: 'id',width:30 },
+			{ header: '姓名', dataIndex: 'name'},
+			{ header: 'Email', dataIndex: 'email' ,width:300  },
+				{ header: 'tt', dataIndex: 'tt' ,width:300  },
+				{ header: 'ttt', dataIndex: 'ttt' ,width:300  },
+//////////////////////////////////////////////操作字段
+			{
+				text: '操作',
+				xtype:'actioncolumn',
+				width: 80,
+				items: [
+					{
+						icon: 'edit.gif', // 指定图标
+						tooltip: '编辑',
+						handler: function(grid, rowIndex, colIndex)
+						{
+							var rec = grid.getStore().getAt(rowIndex);
+							alert("编辑【" + rec.get('name') + "】用户");
+						}
+					},
+					{
+						icon: 'delete.gif', // 指定图标
+						tooltip: '删除',
+						handler: function(grid, rowIndex, colIndex)
+						{
+							var rec = grid.getStore().getAt(rowIndex);
+							alert("删除【" + rec.get('name')+ "】用户");
+						}
+					}
+				]
+			},
+//////////////////////////////////////////////操作字段
+		],
+		width: 800,
+		bbar: {
+			xtype: 'pagingtoolbar',
+			store: userStore, // 指定该分页工具条控制userStore。
+			displayInfo: true
+		},
+		renderTo: Ext.getBody()
+	});
+});
+</script>
+</body>
+</html>

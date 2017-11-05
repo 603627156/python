@@ -1,0 +1,5 @@
+host = 'localhost'
+user = 'reboot'
+passwd = 'reboot@123'
+db = 'reboot'
+charset = 'utf8'

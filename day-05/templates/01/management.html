@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资产管理</title>
+
+</head>
+<style>
+    .hide{
+        display:none !important;
+    }
+</style>
+<body>
+<h3>添加记录</h3>
+<table border="1">
+<tr>
+    <td>序列号:</td>
+    <td>姓名:</td>
+    <td>分机号码:</td>
+    <td>使用部门:</td>
+    <td>端口位置:</td>
+    <td>修改信息:</td>
+    <td>删除信息:</td>
+</tr>
+    {% for i in record%}
+        <td>{{ i[0] }}</td>
+        <td>{{ i[1] }}</td>
+        <td>{{ i[2] }}</td>
+        <td>{{ i[3] }}</td>
+        <td>{{ i[4] }}</td>
+        <td><a onclick="count()">修改</a></td>
+        <!--<td><a href="/management/?id={{ i[0] }}">修改</a></td>-->
+        <td><a href="/management/?id={{ i[0] }}">删除</a></td>
+    </tr>
+    {% endfor %}
+</table>
+    <form class="hide"   id = 'tijiao' action="/management/" method="post">
+					<tr><td align="center"><input type="text" name="user_name" id="user_name" placeholder="序列号" /></td></tr>
+					<tr><td align="center"><input type="text" name="name" id="name" placeholder="姓名" /></td></tr>
+                    <tr><td align="center"><input type="text" name="shuzi_number" id="shuzi_number" placeholder="分机号码" /></td></tr>
+                    <tr><td align="center"><input type="text" name="department" id="department" placeholder="使用部门" /></td></tr>
+                    <tr><td align="center"><input type="text" name="port" id="port" placeholder="端口信息" /></td></tr>
+					<tr><td align="center"><input type="submit" id="change" value="提交" /></td></tr>
+					<span>{{ sucess }}</span>
+				</form>
+
+    <script type="text/JavaScript"  src="../../static/js/jquery-2.1.4.min.js"></script>
+        <script>
+        function count(){
+            $('#tijiao').toggleClass('hide')
+        }
+        </script>
+
+
+</body>
+</html>

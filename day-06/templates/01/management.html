@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<style>
+    .hide{
+        display:none !important;
+    }
+</style>
+<body>
+<!--删除记录-->
+<form id ="test" action="/management/" method="post">
+    <table width="40%" height="10px">
+        <td align="center" ><input name="change" type="button" onclick="count()" value="添加记录" /></td>
+        <td align="center" ><input name="delete" type="button" onclick="doDel()" value="删除记录" /></td>
+    </table>
+</form>
+
+<form id ="test1" action="/update/" method="post">
+    <table width="80%" height="1px">
+        <td align="center" ><a href="http://127.0.0.1/update/" target="show"><input name="update" type="button" onclick="update()" value="更新记录" /></a></td>
+    </table>
+</form>
+<hr>
+<!--增加记录-->
+ <form class="hide"   id = 'tijiao' action="/management/" method="post">
+					<tr><td align="center"><input type="text" name="name" id="name" placeholder="姓名" /></td></tr>
+                    <tr><td align="center"><input type="text" name="shuzinumber" id="shuzi_number" placeholder="分机号码" /></td></tr>
+                    <tr><td align="center"><input type="text" name="department" id="department" placeholder="使用部门" /></td></tr>
+                    <tr><td align="center"><input type="text" name="number" id="number" placeholder="端口信息" /></td></tr>
+					<tr><td align="center"><input type="submit" name = 'add' id="123" value="提交" /></td></tr>
+					<span>{{ sucess }}</span>
+ </form>
+
+<table border="1" cellpadding="4" cellspacing="12">
+
+<tr>
+    <td align="center">选择框:</td>
+    <td align="center">序列号:</td>
+    <td align="center">姓名:</td>
+    <td align="center">分机号码:</td>
+    <td align="center">使用部门:</td>
+    <td align="center">端口位置:</td>
+    <!--<td>修改信息:</td>-->
+    <!--<td>删除信息:</td>-->
+</tr>
+    {% for i in record%}
+        <tr>
+        <!--<td><a href="/management/?id={{ i[0] }}"></a></td>-->
+        <!--<td><a href="/management/?id={{ i.get('id') }}"></a><input type="checkbox" /></td>-->
+        <td><input type="checkbox" user_id="{{ i.get('id') }}" value="{{ i.get('id') }}" placeholder="删除" /> </td>
+        <td align="center">{{ i.get('id') }}</td>
+        <td align="center">{{ i.get('name') }}</td>
+        <td align="center">{{ i.get('shuzinumber') }}</td>
+        <td align="center">{{ i.get('department') }}</td>
+        <td align="center">{{ i.get('number') }}</td>
+
+
+        <!--<td><a href="/management/?id={{ i[0] }}">修改</a></td>-->
+        <!--<td><a href="/management/?id={{ i.get('id') }}">删除</a></td>-->
+        <!--<form action="/management/" method="post">-->
+        <!--<td><a href="/management/?id={{ i.get('id') }}">删除</a></td>-->
+                <!--</form>-->
+        </tr>
+    {% endfor %}
+</table>
+
+
+    <script type="text/JavaScript"  src="../../static/js/jquery-2.1.4.min.js"></script>
+        <script>
+         //添加 jq
+        function count(){
+            $('#tijiao').toggleClass('hide')
+        }
+        //删除jq
+        $(function(){
+            $('#test [name="delete"]').click(function(){
+                var ids = [];
+                $('table input:checked').each(function() {
+                    ids.push($(this).attr('user_id'));
+                });
+                if(ids.length==0){alert('请选择删除项');return;}
+                //console.log(ids);
+                $.ajax({
+                    url:'http://127.0.0.1/management/',
+                    data:{user_id:ids},
+                    type:'post',
+                    //success:function(data){
+                        //console.log(data)
+                   // }
+                })
+                alert('删除成功！');
+            })
+        })
+         //更新jq
+        $(function(){
+            $('#test1 [name="update"]').click(function(){
+                var ids = [];
+                $('table input:checked').each(function() {
+                    ids.push($(this).attr('user_id'));
+                });
+                $.ajax({
+                    url:'http://127.0.0.1/update/',
+                    data:{update_id:ids},
+                    type:'post',
+                    //success:function(data){
+                        //console.log(data)
+                   // }
+                })
+                alert('删除成功！');
+            })
+        })
+    </script>
+
+</body>
+</html>

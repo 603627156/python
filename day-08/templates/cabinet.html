@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% block user %}
+    <div class="row">
+        <div class="col-sm-12 border-bottom white-bg dashboard-header" style="margin-left:15px;height: 800px">
+<v class="col-sm-12">
+{% if res.role==0 %}
+<a href="/cabinet_add/" class="btn btn-sm btn-primary" style="float:right"> 添加机柜</a> 
+{% endif %}
+<br />
+<br />
+<table class="table table-striped table-bordered table-hover " id="editable">
+<thead>
+    <tr>
+        <th class="text-center">机柜id</th>
+        <th class="text-center">机柜名（编号）</th>
+        <th class="text-center">所在机房</th>
+        <th class="text-center">U位</th>
+        <th class="text-center">电量</th>
+		<th class="text-center">操作</th>
+	    </tr>
+</thead>
+<tbody id='idcfro'>
+        {% for user in result %}
+        <tr class="gradeX">
+                <td class="text-center"><a href="/userinfo?id=44">{{ user.id }}</a></td>
+                <td class="text-center">{{ user.cabinet_num }}</td>
+                <td class="text-center">{{ user.idc_name }}</td>
+                <td class="text-center">{{ user.cabinet_u }}</td>
+                <td class="text-center">{{ user.cabinet_a }}</td>
+                {% if res.role==0 %}
+                <td class="text-center">
+                    <button data-id={{ user.id }} class="btn btn-xs btn-info update">编辑</button>
+                    <button data-id={{ user.id }} class="btn btn-xs btn-danger del ">删除</button>
+                </td>
+                {% endif %}
+            </td>
+         </tr>                 
+         {% endfor %}
+</tbody>
+</table>
+
+<!--更新模态窗-->
+<div class="modal fade"  id ="updateModal">   
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">更新机房信息</h4> 
+      </div>
+      <div class="modal-body">
+        <p hidden id="uperrorMsg" class="text-danger" style="color:red"></p> <!-- for error msg-->
+            <form id="updateForm" class="form-horizontal nice-validator n-yellow" novalidate="novalidate">
+            <input type="hidden" id='upid' name="id"><!--update need id-->
+        <div class="form-group">
+                <label for="cabinet_num" class="col-sm-2 control-label">机柜名（编号）<span class="red-fonts">*</span></label>
+                <div class="col-sm-8">
+                    <input id="cabinet_num" name="cabinet_num" placeholder="机柜名（编号）" type="text" class="form-control" readonly="">
+                </div>
+            </div><!--cabinet_num-->
+             <div class="hr-line-dashed"></div>
+                  <div class="form-group">
+                       <label for="idc_name" class="col-sm-2 control-label">所属机房<span class="red-fonts">*</span></label>
+                        <div class="col-sm-8">
+                         <select id="idc_name" name="idc_name"  class="form-control"></select>
+                          </div>
+                 </div>
+
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label for="cabinet_u" class="col-sm-2 control-label">U位<span class="red-fonts">*</span></label>
+                <div class="col-sm-8">
+                    <input id="cabinet_u" name="cabinet_u" placeholder="U位" type="text" class="form-control">
+                </div>
+            </div><!--cabinet_u-->
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label for="cabinet_a" class="col-sm-2 control-label">电量<span class="red-fonts">*</span></label>
+                <div class="col-sm-8">
+                    <input id="cabinet_a" name="cabinet_a" placeholder="电量" type="text" class="form-control">
+                </div>
+            </div>
+        </div> <!--cabinet_a-->
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="updatebtn">确认</button>
+            </div>
+        </div> <!--button-->
+        </form> <!--form-->
+      </div> <!--modal-body-->
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+
+$('#editable').DataTable
+
+({
+        "bDestroy":true, //加上这个，一旦datatable的数据有增加或者删除，会销毁原有的，重新获取
+        "language": {
+                "lengthMenu": "每页 _MENU_ 条记录",
+                "zeroRecords": "没有找到记录",
+                "sInfo": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 ),显示第 _START_ 至 _END_ 项(总共 _TOTAL_ 项)",
+                "infoEmpty": "无记录",
+                "infoFiltered": "(从 _MAX_ 条记录过滤)",
+                "sSearch": "搜索:",
+                "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上一页",
+                "sNext": "下一页",
+                "sLast": "末页"
+                } 
+        },
+        "order": [[ 1, "asc" ]] 
+});
+
+
+<!-- 渲染数据 -->
+$.getJSON('/idcfrom/',function(res){
+     console.log(res)
+     var idc_str=''
+     $.each(res,function(i,v){
+         idc_str +='<tr>'
+         idc_str +='<td>'+v['id']+'</td>'   
+         idc_str +='<td>'+v['idc_nmae']+'</td>'   
+         idc_str +='<td>'+v['cn_name']+'</td>'   
+         idc_str +='<td>'+v['address']+'</td>'   
+         idc_str +='<td>'+v['name']+'</td>'   
+         idc_str +='<td>'+v['phone']+'</td>'
+
+
+         idc_str +='</tr>'   
+     })
+     console.log(idc_str)
+     $('#idcfrom').html(idc_str)
+})
+
+
+// 点击更新按钮，获取id，从逻辑端查出对应的数据，弹出模态窗渲染数据
+$(".update").click(function(){   
+    //$('#updateModal').modal('hide')
+    var id=$(this).attr("data-id")
+    $.getJSON("/cabinet_info/",{'id':id},function(data){
+            console.log(data);
+            $("#upid").val(data["id"]);
+            $("#cabinet_num").val(data["cabinet_num"]);
+           <!-- $("#idc_name").val(data["idc_name"]);-->
+            $("#cabinet_u").val(data["cabinet_u"]);
+            $("#cabinet_a").val(data["cabinet_a"]);
+            $("#updateModal").modal("show")
+
+    $.getJSON('/idcdata/',function(res){
+          console.log(res)
+          var selectstr=''
+          $.each(res,function(i,v){
+           selectstr+='<option value="'+v[0]+'">'+v[0]+'</option>'
+          })
+         console.log(selectstr)
+         $('#idc_name').html(selectstr)
+          })
+        })
+})
+
+
+// 更新数据
+$("#updatebtn").click(function(){
+$.post("/idc_update/",$("#updateForm").serialize(),function(data) {
+    data=JSON.parse(data)
+    if(data["code"]==0){
+        alert("modfiy success")
+        location.reload()
+    }else{
+        alert("update error")
+    }
+    })
+    return false;
+})
+
+/*删除用户*/
+$(".del").click(function(){
+	if(confirm("是否确认删除？")){
+		var id = $(this).attr('data-id')
+        var url = "/cabinet_delete/?id="+id
+        alert(url)
+		$.getJSON(url,function(data){
+			if (data['code']== 0 ){
+                location.reload()
+			}else{
+                alert(data["errmsg"])
+			}
+    	})
+    }  // end confirm
+})   
+</script>
+
+</div> <!--col-sm-12-->
+
+
+         </div>
+    </div>
+    <br>
+
+{% endblock %}

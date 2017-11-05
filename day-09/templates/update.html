@@ -1,0 +1,17 @@
+<html>
+<body>
+
+<h1>更新信息</h1>
+ <form action="/update/" accept-charset="UTF-8" method="post">
+        <input value="{{ result['msg']['user_id'] }}" type="hidden"  name="user_id">
+        姓名 ：<input placeholder="姓名" type="text" value="{{result.user_name}}" name="user_name"><br>
+        密 码：<input placeholder="密码" type="text" value="{{result.user_password}}" name="user_password"><br>
+        角 色：<input type="radio" name="user_role" value=0 {%if result.user_role==0%}checked{%endif%}>管理员
+               <input type="radio" name="user_role" value=1 {%if result.user_role==1%}checked{%endif%} >用户
+               <br>
+        <input type="submit"  value="更新"> <br>
+                                                                                                                                      
+ </form>
+</body>
+</html>
+

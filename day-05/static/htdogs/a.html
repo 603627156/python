@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+      <style type="text/css">
+/*{##################定义全页面布局####################################}*/
+html,body,h1,h2,h3,p,ol,ul,li,a{
+            padding: 0;
+            border: 0;
+            margin: 0;
+            background-color:rgb(49,54,58);
+        }
+ul li{
+            display: inline;
+            padding: 20px;
+            text-align: right;
+            line-height: 55px;
+    }
+ul li a{
+            /*字体大小*/
+            font-size: 15px;
+            /*字体颜色*/
+            color: rgb(255,255,255);
+            /*调整间距*/
+            margin:0 10px;
+            text-decoration:none
+    }
+ol li a{
+            /*字体大小*/
+            font-size: 15px;
+            /*字体颜色*/
+            color: rgb(255,255,255);
+            /*调整间距*/
+            text-decoration:none;
+    }
+dl dt a{
+             color: white;
+             text-decoration:none;
+             font-size: 15px;
+             margin:0 5px;
+             height: 30px;
+             line-height: 30px;
+
+
+}
+
+
+/*{#################################头部信息######################################}*/
+        .header{
+            margin: auto;
+            text-align: right;
+            background-color: rgb(49,54,58);
+            width: 100%;
+            height: 60px;
+            border-bottom:1px solid rgb(80,85,88);
+
+        }
+/*{#################################中间###########################################}*/
+        .second{
+            background-color: red;
+            width: 100%;
+
+        }
+        .third{
+                    height:50px;
+                    line-height: 50px;
+                    border-right:1px solid red;
+                    text-align: right;
+        }
+
+/*{###################################一级菜单###############################################}*/
+.title{
+        font-size: 17px;
+        text-align: left;
+        color:rgb(255,255,255);
+        padding-top: 25px;
+
+        }
+
+        .hide{
+            display: none;
+        }
+
+          .body{
+            text-align: center;
+          }
+
+
+    </style>
+</head>
+<body>
+
+<div class="item">
+                <div class="title" onclick="Func(this);"><span class="glyphicon glyphicon-search"></span>&nbsp;用户管理</div>
+                <div class="body ">
+                    <dl>
+                     <dt><a href="w3c.html" target="show" >用户管理</a></dt>
+                     <dt><a href="w3c.html" target="show">组件管理</a></dt>
+                     <dt><a href="w3c.html" target="show">令牌管理</a></dt>
+                    </dl>
+                </div>
+</div>
+
+<div class="item">
+                <div class="title" onclick="Func(this);"><span class="glyphicon glyphicon-heart"></span>&nbsp;资产管理</div>
+        <div class="body hide">
+                <dl>
+                     <dt><a href="w3c.html" target="show" >主机管理</a></dt>
+                     <dt><a href="http://127.0.0.1/management/" target="show" >录音管理</a></dt>
+                     <dt><a href="w3c.html" target="show" >监控管理</a></dt>
+                </dl>
+        </div>
+</div>
+
+<div class="item">
+                <div class="title" onclick="Func(this);"><span class="glyphicon glyphicon-cloud"></span>&nbsp;网络管理</div>
+        <div class="body hide">
+                <dl>
+                     <dt><a href="w3c.html" target="show" >路由器</a></dt>
+                     <dt><a href="w3c.html" target="show" >交换机</a></dt>
+                     <dt><a href="w3c.html" target="show" >监控管理</a></dt>
+                </dl>
+        </div>
+</div>
+
+<div class="item">
+                <div class="title" onclick="Func(this);"><span class="glyphicon glyphicon-cog"></span>&nbsp;系统管理</div>
+        <div class="body hide">
+                <dl>
+                     <dt><a href="w3c.html" target="show" >导出配置</a></dt>
+                     <dt><a href="w3c.html" target="show" >导入配置</a></dt>
+                     <dt><a href="w3c.html" target="show" >重启服务</a></dt>
+                </dl>
+        </div>
+</div>
+
+<div class="item">
+                <div class="title" onclick="Func(this);"><span class="glyphicon glyphicon-th"></span>&nbsp;发布系统</div>
+        <div class="body hide">
+                <dl>
+                     <dt><a href="w3c.html" target="show" >备份配置</a></dt>
+                     <dt><a href="w3c.html" target="show" >更新配置</a></dt>
+                     <dt><a href="w3c.html" target="show" >重启服务</a></dt>
+                </dl>
+        </div>
+</div>
+
+
+
+    <script src="../js/jquery-2.1.4.min.js"></script>
+      <script>
+        function ChangTab(ths){
+                //获取当前点击的标签 $(ths)
+                $(ths).addClass('current').siblings().removeClass('current');
+                var contentId = $(ths).attr('tangbo');
+                //获取当前标签的属性tangbo对应的值
+                //将值 $('#'xx')显示，其它的隐藏
+                var temp = "#" + contentId;
+                $(temp).removeClass('hide').siblings().addClass('hide');
+        }
+
+         function Func(ths){
+            //获取菜单一
+            //获取菜单二
+            $(ths).next().removeClass('hide');
+            $(ths).parent().siblings().find('.body').addClass('hide');
+
+
+        }
+    </script>
+</body>
+</html>

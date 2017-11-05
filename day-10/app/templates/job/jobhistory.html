@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block breadcrumb %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+     <br />
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">仪表盘</a>
+            </li>
+            <li>
+                <a href="/jobhistory/">
+                历史工单
+                </a>
+            </li>
+        </ol>
+    </div>
+</div><!--右边导航结束-->
+{% endblock %}
+
+{% block content %}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+<div class="col-sm-12">
+<table class="table table-striped table-bordered table-hover " id="history">
+<thead>
+    <tr>
+        <th class="text-center">申请人</th>
+        <th class="text-center">工单类型</th>
+        <th class="text-center">申请时间</th>
+        <th class="text-center">处理时间</th>
+        <th class="text-center">处理人</th>
+        <th class="text-center">工单状态</th>
+        <th class="text-center">操作</th>
+    </tr>
+</thead>
+<tbody>
+   
+     {% for item in data %}
+        <tr class="gradeX">
+                <td class="text-center">{{item.apply_persion}}</td>
+	           	{% if item.apply_type  == 0 %}
+                    <td class="text-center" style='color:green'>用户权限</td>
+                {% elif  item.apply_type  == 1 %}
+                    <td class="text-center" style='color:green'>数据库操作</td>
+                {% elif  item.apply_type  == 2 %}
+                     <td class="text-center" style='color:green'>服务配置</td>
+                {% else %}
+                    <td class="text-center" style='color:green'>其他...</td>
+		        {% endif %}
+                <td class="text-center">{{item.apply_date}}</td>
+                <td class="text-center">{{item.deal_time}}</td>
+                <td class="text-center">{{item.deal_persion}}</td>
+	            {% if item.status == 0 %}	
+                    <td class="text-center" style='color:green'>申请中</td>
+                {% elif  item.status  == 1 %}
+                    <td class="text-center" style='color:red'>处理中</td>
+                {% else %}
+                    <td class="text-center" style='color:blue'>完成</td>
+		        {% endif %}
+                <td class="text-center">
+	                <button data-id='{{item.id}}' class='btn btn-info detail'>详情</button>
+		        </td>
+         </tr>
+    {% endfor %}
+    
+</tbody>
+</table>
+</div> <!--col-sm-12-->
+
+
+<!--详情模态窗-->
+<div class="modal fade" id='infoModel'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	     <h4 class="modal-title">详情</h4>
+    </div><!--header-->
+    <div class="modal-body">
+        <div class="form-group">
+            <label class="control-label">申请人</label>
+             <div class="controls">
+                        <span id="detail_applypersion" class="input-xlarge uneditable-input"></span>
+            </div>
+        </div> <!--detail applypersion   end-->
+        <div class="form-group">
+            <label class="control-label">申请时间</label>
+             <div class="controls">
+                        <span id="detail_applytime" class="input-xlarge uneditable-input"></span>
+            </div>
+        </div> <!--detail spply_time end-->
+        <div class="form-group">
+            <label class="control-label">申请描述</label>
+             <div class="controls">
+                        <span id="detail_applydesc" ></span>
+            </div>
+        </div> <!--detail desc end-->
+        <div class="form-group">
+            <label class="control-label">处理摘要</label>
+             <div class="controls">
+                        <span id="detail_dealdesc"></span>
+            </div>
+        </div> <!--detail deal desc end-->
+
+    </div><!--body-->
+    <div class="modal-footer">
+      	<button type="button" class="btn btn-default update-cancel" data-dismiss="modal">关闭</button>
+   </div><!--footer-->
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+$('.detail').click(function(){
+    var id=$(this).attr('data-id')
+    var url = "/jobdetail/?id="+id
+    $.getJSON(url,function(data){
+	if (data['code'] == 0){
+	    result = data['msg']
+        console.log(result)
+         $('#detail_applypersion').html(result['apply_persion'])
+         $('#detail_applytime').html(result['apply_date'])   
+         $('#detail_applydesc').html('<pre>'+result['apply_desc']+'</pre>')
+         $('#detail_dealdesc').html('<pre>'+result['deal_desc']+'</pre>')
+	}else{
+	    $('#errmsg').html('fail')
+	}
+    })
+    $('#infoModel').modal('show')
+})
+$('#history').DataTable({
+    "bDestroy": true, 
+    "language": {
+        "lengthMenu": "每页 _MENU_ 条记录",
+        "zeroRecords": "没有找到记录",
+        "sInfo": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 ),显示第 _START_ 至 _END_ 项(总共 _TOTAL_ 项)",
+        "infoEmpty": "无记录",
+        "infoFiltered": "(从 _MAX_ 条记录过滤)",
+        "sSearch": "搜索:",
+        "oPaginate": {
+        "sFirst": "首页",
+        "sPrevious": "上一页",
+        "sNext": "下一页",
+        "sLast": "末页"
+        }
+    },
+    "order": [[ 2,"desc" ]]
+})
+</script>
+{% endblock%}

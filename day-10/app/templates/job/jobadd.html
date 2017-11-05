@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block breadcrumb %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+     <br />
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">仪表盘</a>
+            </li>
+            <li>
+                <a href="/jobadd/">
+                工单申请
+                </a>
+            </li>
+        </ol>
+    </div>
+</div><!--右边导航结束-->
+{% endblock %}
+
+{% block content %}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-10">
+                 <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>运维工单申请</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form id="jobForm" class="form-horizontal nice-validator n-yellow" novalidate="novalidate">
+                            <div class="form-group">
+                                <label for="jobname" class="col-sm-3 control-label  ">工单申请类型</label>
+                                <div class="col-sm-8">
+								<select name='apply_type' id='apply_type' class='btn btn-default'>
+									<option value=0>用户权限</option>
+									<option value=1>数据库操作</option>
+									<option value=2>服务配置</option>
+									<option value=3>其他</option>
+								</select>
+                                </div>
+						    </div> <!--apply_type-->
+							<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<label for="apply_desc" class="col-sm-3 control-label">工单详情</label>
+								<div class="col-sm-8">
+									<textarea id='apply_desc' name="apply_desc" rows='15' cols='70'></textarea>
+								</div>
+						    </div> <!--apply_desc-->
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-2">
+                                    <button id="submit_button" class="btn btn-primary">确认提交</button>
+									<button id='cancel_button' class="btn btn-white" type="reset">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+
+$("#submit_button").click(function(){
+	$.post("/jobadd/",$("#jobForm").serialize(),function(data){
+	    console.log(data)
+	    data=JSON.parse(data);
+	    if(data["code"] == 0){
+		swal({
+		    title:'Congratulation',
+		    text:data['result'],
+		    type:'success',
+		    confirmButtonText:'确定'
+		    },function(){
+			location.href='/job/'
+		    })
+	    }else{
+		swal('Error',data['errmsg'],'error')
+	    }
+	})
+    return false
+})
+
+
+</script>
+
+
+{% endblock %}
