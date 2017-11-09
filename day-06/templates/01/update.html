@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>update</title>
+</head>
+<body style="text-align:center">
+	<h1>修改用户信息</h1>
+			 <form action="/update/" accept-charset="UTF-8" method="post">
+                    <span><input style="display:none" type="text" name="uid" id="{{ uid }}" value="{{ uid }}" placeholder="姓名" /></span>
+                    <tr><td align="center"><input type="text" name="shuzinumber" id="shuzinumber" placeholder="分机号码" /></td></tr>
+                    <tr><td align="center"><input type="text" name="department" id="department" placeholder="使用部门" /></td></tr>
+                    <tr><td align="center"><input type="text" name="number" id="number" placeholder="端口信息" /></td></tr>
+					<tr><td align="center"><input type="submit" name = 'update_id[]' value="提交" /></td></tr>
+            </form>
+</body>
+</html>

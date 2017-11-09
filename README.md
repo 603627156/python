@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 * python 综合学习之路
 https://github.com/603627156
 
@@ -44,3 +45,7 @@ vim ~/.ssh/id_rsa.pub
 添加过程github会提示你输入一次你的github密码
 
 添加完成后再次执行git clone就可以成功克隆github上的代码库了。
+=======
+# python-
+* python 综合学习之路
+>>>>>>> 80d93edadcb216e3f516e66509cfd0eda9264501

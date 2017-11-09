@@ -1,0 +1,99 @@
+{%  extends "base.html" %}
+{%  block user %}
+       <div class="row">
+        <div class="col-sm-12 border-bottom white-bg dashboard-header" style="margin-left:15px;height: 800px">
+                
+<div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-10">
+                 <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>填写机柜信息</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form id="userForm" class="form-horizontal nice-validator n-yellow" novalidate="novalidate">
+                            <div class="form-group">
+                                <label for="cabinet_num" class="col-sm-2 control-label  ">机柜名（编号）<span class="red-fonts ">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="cabinet_num" name="cabinet_num" placeholder="机柜名（编号）" type="text" class="form-control" aria-required="true" data-tip="机柜名">
+                                 </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label for="idc_name" class="col-sm-2 control-label">所属机房<span class="red-fonts">*</span></label>
+                                <div class="col-sm-8">
+                                    <select id="idc_name" name="idc_name"  class="form-control"></select>
+                                 </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label for="cabinet_u" class="col-sm-2 control-label">U位<span class="red-fonts">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="cabinet_u" name="cabinet_u" placeholder="U位" type="text" class="form-control" aria-required="true" data-tip="U位">
+                                 </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <label for="cabinet_a" class="col-sm-2 control-label">电量<span class="red-fonts">*</span></label>
+                                <div class="col-sm-8">
+                                    <input id="cabinet_a" name="cabinet_a" placeholder="电量" type="text" class="form-control" aria-required="true" data-tip="电量">
+                                 </div>
+                            </div>
+                            <div style="color:red" class="text-center" id="errmsg"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <button class="btn btn-white" type="reset">取消</button>
+                                    <button id="submit_button" class="btn btn-primary">确认保存</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+      $.getJSON('/idcdata/',function(res){
+          console.log(res)
+          var selectstr=''
+          $.each(res,function(i,v){
+           selectstr+='<option value="'+v[0]+'">'+v[0]+'</option>'
+          })
+         console.log(selectstr)
+         $('#idc_name').html(selectstr)
+          })
+
+
+        $("#submit_button").click(function(){
+            $.post("/cabinet_add/",$("#userForm").serialize(),function(data){
+                data=JSON.parse(data);
+                console.log(data)
+                if(data["code"] == 0){
+                    alert(data['msg'])
+                    location.href="/cabinet/";
+                }else{
+                    $("#errmsg").text(data["errmsg"]);
+                }
+            })
+            return false
+        })
+    </script>
+
+
+         </div>
+    </div>
+    <br>
+
+{% endblock %}

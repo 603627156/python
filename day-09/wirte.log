@@ -1,0 +1,129 @@
+2017-09-22 11:47:30,522 - tsngvdjdh - anxinlog.py- INFO - foorbar
+2017-09-22 12:49:11,820 - getone: select * from user where user_name='tangbo' - anxinlog.py- INFO - foorbar
+2017-09-22 12:49:13,965 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 12:50:10,403 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 12:50:10,403 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 12:50:46,861 - tsngvdjdh - anxinlog.py- INFO - foorbar
+2017-09-22 12:50:47,152 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:09,988 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:11,468 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:14,779 - getone: select * from user where user_id='undefined' - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:14,810 - getone: select * from user where user_id='18' - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:20,459 - getone: update user set user_id='18',user_name='tangbo',user_password='12344',user_role='1' where user_id=18 - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:34,191 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:34,191 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:40,333 - getone: select * from user where user_id='undefined' - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:40,333 - getone: select * from user where user_id='undefined' - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:40,339 - getone: select * from user where user_id='15' - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:46,405 - getone: update user set user_id='15',user_name='dsfd',user_password='eerrr',user_role='1' where user_id=15 - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:46,455 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:46,455 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:41:46,455 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:42:34,961 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:42:34,961 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:42:34,961 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:42:34,961 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:42:43,401 - insert: insert into user (user_name,user_password,user_role) values ("gbf","ww","0") - anxinlog.py- INFO - foorbar
+2017-09-22 13:51:58,763 - getone: select * from user where user_name='tangbo' - anxinlog.py- INFO - foorbar
+2017-09-22 13:51:58,858 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:01,157 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:22,471 - getone: select * from user where user_id='undefined' - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:22,488 - getone: select * from user where user_id='10' - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:29,030 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:29,030 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:35,160 - getone: delete from user where user_id = 16; - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:35,260 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:35,260 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:35,260 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:38,967 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:38,967 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:38,967 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:52:38,967 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:07,911 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:07,911 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:07,911 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:07,911 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:07,911 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:33,854 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:33,854 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:33,854 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:33,854 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:33,854 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:33,854 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:40,798 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 13:54:40,798 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 13:55:11,171 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 13:55:11,171 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 13:55:11,171 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 14:56:49,120 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 14:56:49,120 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 14:56:49,120 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 14:56:49,120 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 14:57:38,969 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 14:57:38,969 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 14:57:38,969 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 14:57:38,969 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 14:57:38,969 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 14:57:38,969 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 14:57:38,969 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 15:51:07,218 - getone: select * from user where user_name='tangbo' - anxinlog.py- INFO - foorbar
+2017-09-22 15:51:07,342 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 15:51:18,513 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 15:55:32,124 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 15:55:32,124 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:04,995 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:04,995 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:04,995 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:17,823 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:17,823 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:17,823 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:17,823 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:51,638 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:51,638 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:51,638 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:51,638 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:51,638 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,206 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,206 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,206 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,206 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,206 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,206 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,371 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,371 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,371 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,371 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,371 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,371 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:18:52,371 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:33,579 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:33,579 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:33,579 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:33,579 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:33,579 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:33,579 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:33,579 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:33,579 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:48,931 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:48,931 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:48,931 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:48,931 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:48,931 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:48,931 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:48,931 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:48,931 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:19:48,931 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:20:22,383 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:20:22,383 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:20:22,383 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:20:22,383 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:20:22,383 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:20:22,383 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:20:22,383 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:20:22,383 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:20:22,383 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:20:22,383 - getall: select * from user - anxinlog.py- INFO - foorbar
+2017-09-22 16:21:02,828 - getone: select * from user where user_id='undefined' - anxinlog.py- INFO - foorbar
+2017-09-22 16:21:02,842 - getone: select * from user where user_id='2' - anxinlog.py- INFO - foorbar
+2017-09-22 16:21:10,212 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar
+2017-09-22 16:21:10,212 - getone: select localhost_mem from localhost - anxinlog.py- INFO - foorbar

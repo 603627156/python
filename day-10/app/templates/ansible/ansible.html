@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block breadcrumb %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+     <br />
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">仪表盘</a>
+            </li>
+            <li>
+                <a href="/ansible/">
+                命令编排
+                </a>
+            </li>
+        </ol>
+    </div>
+</div><!--右边导航结束-->
+{% endblock %}
+
+{% block content %}
+ <div>
+ <form  id="cmdform" class="form-inline">     <!--定义垂直表单样式-->
+ <div class="form-group"> <!--定义一组div-->
+       <label>目标主机</label>
+       <select id="pattern" name="pattern"  class="form-control" >
+         <option value='lrz'>lrz</option>
+         <option value='nginx'>nginx</option>
+         <option value='all'>all</option>
+       </select>
+ </div>    <!---pattern end-->
+ 
+  <div class="form-group">
+   <label>模块</label>
+   <select id="module" name="module"  class="form-control" >
+   <option value='shell'>shell</option>
+   <option value='command'>command</option>
+   </select>
+  </div>     <!---module  end-->
+
+  <div class="form-group">
+    <label>命令</label>
+    <select id="cmd" name="cmd"  class="form-control" >
+    <option value='pwd'>pwd</option>
+    <option value='uptime'>uptime</option>
+    <option value='df -h'>df -h</option>
+    <option value='free -m'>free -m</option>
+    </select>
+  </div>     <!---cmd  end-->
+
+  <div class="form-group">
+       <label>并发</label>
+       <select id="forks" name="forks"  class="form-control" >
+       <option value='5'>5</option>
+       <option value='10'>10</option>
+       <option value='15'>15</option>
+       </select>
+    </div> <!--forks  end -->
+
+ <div class="form-group">
+     <button id="submit_button" class="btn btn-primary btn-sm">执行命令</button>
+     <button id="joblist" class="btn btn-info btn-sm">任务列表</button>
+ </div><!--button end-->
+</form><!--form end-->
+</div>  
+
+<div class="row">
+    <pre id='display' style="color:#f8f8ff;background:#000000"><pre/>
+</div>
+
+
+<script>
+
+function joblist(){
+    $.get('joblist',function(data){
+        console.log(data)
+        //data = "<pre>"+data+"</pre>"
+        $('#display').html(data)
+    })
+}
+joblist()
+
+/* submit cmdform*/
+$('#cmdform').on('submit',function(){
+    var str = $('#cmdform').serialize()
+    var url = '/cmd/?'+str
+    console.log(url)
+    $.post(url,function(data){
+        console.log(data)
+         $('#display').html(data)
+    })
+    return false
+})   //submit end
+
+/* show joblist */
+$('#joblist').on('click',function(){
+    joblist()
+    return false
+})
+
+</script>
+
+
+{% endblock %}
