@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% block content%}
+    <!--index表格-->
+    <blockquote class="layui-elem-quote">
+    </blockquote>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+      <legend>当前系统信息</legend>
+</fieldset>
+
+<div class="layui-form">
+  <table  class="layui-table">
+    <colgroup>
+      <col width="150">
+      <col width="150">
+      <col width="200">
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th>系统名称</th>
+        <th>当前版本</th>
+        <th>IP地址</th>
+        <th>运行时长</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tangbo&reg;运维管理控制系统</td>
+        <td>2017.10.29.v1.0</td>
+        <td>192.168.6.250</td>
+        <td>{{ username }}</td>
+      </tr>
+    </tbody>
+</table>
+</div>
+{% endblock%}

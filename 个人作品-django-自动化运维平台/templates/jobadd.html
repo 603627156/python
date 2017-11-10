@@ -1,0 +1,94 @@
+{% extends "index.html" %}
+{% block content%}
+<!--右边第二层面包导航-->
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-12">
+     <br />
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">仪表盘</a>
+            </li>
+            <li>
+                <a href="/">
+
+工单申请
+
+
+                </a>
+            </li>
+        </ol>
+    </div>
+</div> <!--右边导航结束-->
+
+<!--正文部分分了三层-->
+<div class="wrapper wrapper-content">
+
+    <div class="row">
+        <div class="col-sm-12 border-bottom white-bg dashboard-header" style="margin-left:15px;height: 800px">
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+	    <div class="ibox float-e-margins">
+		<div class="ibox-title">
+		    <h5>运维工单申请</h5>
+		</div>
+		<div class="ibox-content">
+		    <form id="jobsForm" class="form-horizontal nice-validator n-yellow" novalidate="novalidate">
+			<div class="form-group">
+			    <label for="hostname" class="col-sm-3 control-label">工单申请类型</label>
+			    <div class="col-sm-8">
+			    <select style="display: none" name='apply_type' id='apply_type' class='btn btn-default'>
+				    <option value=0>用户权限</option>
+				    <option value=1>数据库操作</option>
+				    <option value=2>服务配置</option>
+				    <option value=3>其他</option>
+				</select>
+			    </div>
+			</div>  <!--apply_type-->
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+			    <label for="apply_desc" class="col-sm-3 control-label">工单详情</label>
+			    <div class="col-sm-8">
+			        <textarea id='apply_desc' name="apply_desc" rows='15' cols='70'></textarea>
+		        </div>
+			</div> <!--apply_desc-->
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+			    <div class="col-sm -6 col-sm-offset-2">
+			    	<button id="submit_button" class="btn btn-primary">确认提交</button>
+				    <button class="btn btn-white" type="reset">重置</button>
+			   </div>
+		   </div>
+		   </form> <!--form-->
+		</div>  <!--ibox-content-->
+	</div><!--ibox-->
+  </div><!--r0w-->
+</div> <!--wrapper-->
+        </div>
+        </div>
+    </div>
+            <script>
+$('#apply_type').multiselect({
+	    placeholder: "请选择",
+})
+
+$("#submit_button").click(function(){
+    var str= $('#jobsForm').serialize()
+    str = str.replace(/\+/g," ")   // g表示对整个字符串中符合条件的都进行替换
+    $.post("/jobadd/",str,function(data){
+	    data=JSON.parse(data);
+	    if(data["code"] == 0){
+	        swal({
+		    title:'Congratulation',
+		    text:data['result'],
+		    type:'success',
+		    confirmButtonText:'确定'
+		    })
+	    }else{
+	        swal('Error',data['errmsg'],'error')
+	    }
+    })
+    return false
+})
+</script>
+{% endblock%}
