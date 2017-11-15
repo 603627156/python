@@ -1,0 +1,86 @@
+<!--&lt;!&ndash;更新个人信息模态窗&ndash;&gt;-->
+<!--更新模态窗-->
+<div class="modal fade"  id ="updateModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <hr>
+          <h4 class="modal-title">更新用户信息</h4>
+      </div>
+      <div class="modal-body">
+        <p hidden id="uperrorMsg" class="text-danger" style="color:red"></p> <!-- for error msg-->
+            <form id="updateForm" class="form-horizontal nice-validator n-yellow" novalidate="novalidate">
+            <input type="hidden" id='upid' name="id"><!--update need id-->
+            <div class="form-group">
+                <label for="username" class="col-sm-2 control-label">用户名<span class="red-fonts">*</span></label>
+                <div class="col-sm-8">
+                    <input id="name" name="user_name" placeholder="Username" type="text" class="form-control" readonly="">
+                </div>
+            </div><!--username-->
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">姓名<span class="red-fonts">*</span></label>
+                <div class="col-sm-8">
+                    <input id="name_cn" name="user_user" placeholder="Name_cn" type="text" class="form-control">
+                </div>
+            </div><!--name-->
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label for="mobile" class="col-sm-2 control-label">Mobile<span class="red-fonts">*</span></label>
+                <div class="col-sm-8">
+                    <input id="mobile" name="user_phone" placeholder="Mobile" class="form-control">
+                </div>
+            </div><!--mobile-->
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+                <label for="email" class="col-sm-2 control-label">Email<span class="red-fonts">*</span></label>
+                <div class="col-sm-8">
+                    <input id="email" name="user_mail" type="email" placeholder="Email" class="form-control">
+                </div>
+            </div><!--Email-->
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+            <label for="role" class="col-sm-2 control-label">角色<span class="red-fonts">*</span></label>
+                <div class="col-sm-8">
+                    <div class="col-sm-4">
+                        <div class="radio i-checks">
+                            <label><input type="radio" value="1" name="user_role" >普通用户</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="radio i-checks">
+                            <label><input type="radio" value="0" name="user_role">管理员</label>
+                         </div>
+                    </div>
+                </div>
+            </div><!--role-->
+            <div class="hr-line-dashed"></div>
+            <div class="form-group">
+            <label class="col-sm-2 control-label">状态<span class="red-fonts">*</span></label>
+              <div class="col-sm-8">
+                <div class="col-sm-4">
+                    <div class="radio i-checks">
+                        <label><input type="radio" value="0"   name = "user_status">启用</label>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="radio i-checks">
+                        <label><input type="radio" value="1" name = "user_status">禁用</label>
+                    </div>
+                </div>
+             </div>
+        </div> <!--status-->
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="updatebtn">确认</button>
+            </div>
+        </div> <!--button-->
+        </form> <!--form-->
+      </div> <!--modal-body-->
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
