@@ -1,0 +1,160 @@
+（1）什么是正则表达式？
+     只提取我们关注的数据，此时可以通过表达式进行提取，正则表达式就是其中一种进行数据筛选的表达式。
+     常用的有： re  xpath
+
+（2）原子
+    原子是正则表达式中最基本的组成单位，每个正则表达式至少包含一个原子。
+    常见类型：
+            import re
+        1.普通字符作为原子
+            # 原子
+            import re
+            str = 'tangbo renchuan tangbowen'
+            pth = 'renchuan'
+            #搜索函数，需要搜索的内容  原始内容
+            res = re.search(pth,str)
+            print(res)
+                运行结果：<_sre.SRE_Match object; span=(7, 15), match='renchuan'>
+
+        2.非打印字符作为原子
+            \n 换行
+            \t tab键
+            \  其它\什么的
+
+        3.通用字符作为原子,其实就是用一个字符，代替一类的东西
+            \w 匹配字母，数字，下划线
+            \W 除匹配字母，数字，下划线
+            \d 匹配数字
+            \D 除匹配数字
+            \s 匹配空白字符
+            \S 匹配除空白字符的任意字符
+
+            import re
+            str = 'tangborenchuan1521tangbowen'
+            pth = '\d\d\d\d\w'
+            #搜索函数，需要搜索的内容  原始内容
+            res = re.search(pth,str)
+            print(res)
+
+            运行结果：None<_sre.SRE_Match object; span=(14, 19), match='1521t'>
+
+        4.原子表
+            [ ] 中括号来进行
+
+（3）元字符
+    元字符，就是正则表达式中具有一些特殊含义的字符，比如重复N次前面的字符等...
+    匹配除换行符外任意一个字符
+    ^ 匹配开始位置
+    $ 匹配结束位置
+    * 代表前面的原子重复出现0次，1次或者多次
+    ? 代表前面的原子重复出现0次，1次
+    + 代表前面的原子重复出现1次或者多次
+    [n] 大括号+数字  代表恰好出现n次
+    [n,] 前面的原子至少n次
+    [n,m] 至少n次，至多m次
+    |  代表模式选择符 或者
+    ( ) 小括号代表模式单元
+    .   表示一个字符
+    import re
+    str = 'tangborenchuan1521tangbowen'
+    pth = 'tang.o'
+    #搜索函数，需要搜索的内容  原始内容
+    res = re.search(pth,str)
+    print(res)
+
+    import re
+    str = 'tangborenchuan1521tangbowen'
+    pth = 'tan...'
+    #搜索函数，需要搜索的内容  原始内容
+    res = re.search(pth,str)
+    print(res)
+
+    运行结果：<_sre.SRE_Match object; span=(0, 6), match='tangbo'>
+
+    import re
+    str = 'tangbo renchuan1521 cangbowen'
+    pth = 'can.*'
+    #搜索函数，需要搜索的内容  原始内容
+    res = re.search(pth,str)
+    print(res)
+    运行结果：<_sre.SRE_Match object; span=(20, 29), match='cangbowen'>
+
+（4）模式修正符   重点
+    可以在不盖被正则表达式的情况下，通过模式修正符来改变正则表达式的含义，从而实现一些匹配结果的调整等功能。
+    I 匹配的时候忽略大小写 *******************
+    import re
+    string = 'Tangborenchuan152cangbowen'
+    pth = 'tang'
+    #搜索函数，需要搜索的内容  原始内容
+    res = re.search(pth,string,re.I)
+    print(res)
+    运行结果：<_sre.SRE_Match object; span=(0, 4), match='Tang'>
+
+    M 多行匹配  *******************
+    L 本地化识别匹配，用得不多
+    U 根据unicode来解析，用得不多
+    S 让.匹配，包括换行 *******************
+
+（5）贪婪模式与懒惰模式
+    贪婪模式：就是尽可能多的去匹配   默认是贪婪模式
+    import re
+    string = 'Tangborenchuan152cangbowen'
+    pth = 't.*o'
+    #搜索函数，需要搜索的内容  原始内容
+    res = re.search(pth,string,re.I)
+    print(res)
+    前面就找到了，它还是往后找。
+    运行结果：<_sre.SRE_Match object; span=(0, 23), match='Tangborenchuan152cangbo'>
+
+    懒惰模式：尽可能少的去匹配  加个?号  .*?就是一个整体，让它匹配到了就不在往下匹配
+        import reimport re
+        string = 'Tangborenchuan152cangbowen'
+        pth = 't.*?o'
+        #搜索函数，需要搜索的内容  原始内容
+        res = re.search(pth,string,re.I)
+        print(res)
+
+        运行结果：<_sre.SRE_Match object; span=(0, 6), match='Tangbo'>
+
+（6）正则表达式函数
+    正则表达式函数有：
+    re.match()：       从头开始匹配
+    import re
+    string = 'Tangborenchuan152cangbowen'
+    pth = 'c.*?o'
+    #搜索函数，需要搜索的内容  原始内容
+    res = re.match(pth,string,re.I)
+    print(res)
+    运行结果：None  没在开头，它就不能匹配了
+
+    re.search()函数：  从任意一个地方匹配
+
+    全局匹配函数：
+    import re
+    string = 'tangbo renchuantangbo 152tangbowen'
+    pth = 't.*?o'
+    #搜索函数，需要搜索的内容  原始内容
+    res = re.compile(pth).findall(string)
+    print(res)
+    运行结果：['tangbo', 'tangbo', 'tangbo']  全部都匹配出来了，并且是列表
+
+    re.sub()函数：  用于字符串替换
+#######################练习########################
+（7）常见正则实例
+    如何匹配.com .cn网址，如何匹配电话号码？
+    string =<a href='www.baidu.com'>百度首页</a>
+
+    import re
+    string = "<a href='http://www.baidu.com'>百度首页</a>"
+    pth = "[a-zA-Z]+://[^\s]*[.com|.cn]"
+    res = re.compile(pth).findall(string)
+    print(res)
+    运行结果：['http://www.baidu.com']   ['ftp://www.baidu.com']
+
+    匹配电话号码：
+    string = "jshdjsdh021-88273657dskhdsk0232-2838732"
+    pat = "\d{3}-\d{8}|\d{4}-\d{7}"
+    res = re.compile(pat).findall(string)
+    print(res)
+    运行结果：['021-88273657', '0232-2838732']
+

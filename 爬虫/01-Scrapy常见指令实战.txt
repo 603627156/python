@@ -1,0 +1,159 @@
+（1）Scrapy常见指令实战：
+
+
+（2）XPath 表达式与正则表达式简单对比：
+     XPath表达式效率高一点
+     正则表达式功能更为强大
+     一般优先选择XPath表达式，但是XPath解决不了，就选择正则来匹配
+
+     / 逐层提取    /html/head/title/text()
+     text() 提取标签下的文本
+     //标签名**   提取所有名为**的标签
+     //标签名[@属性=属性值]  提取属性为XX的标签
+
+
+
+     实例：
+     提取标题： /html/head/title/text()
+     提取所有的div标签： //div
+     t提取div中<div class="tools">标签的内容： //<div[@class="tolos"]>
+
+     小练习: //ul[@class='lddd']/li/a/text()
+
+ （3）开始做 进入目录E:\tangbo\PycharmProjects  创建项目dangdang
+    1. E:\tangbo\PycharmProjects>scrapy startproject dangdang
+        New Scrapy project 'dangdang', using template directory 'e:\\python3.5\\lib\\sit
+        e-packages\\scrapy\\templates\\project', created in:
+            E:\tangbo\PycharmProjects\dangdang
+
+        You can start your first spider with:
+            cd dangdang
+            scrapy genspider example example.com
+
+        E:\tangbo\PycharmProjects>
+
+    2.在dangdang项目下创建一个爬虫文件                     爬虫文件名dd+域名
+        E:\tangbo\PycharmProjects>scrapy genspider -t basic dd dangdang.com
+            Created spider 'dd' using template 'basic'
+
+            E:\tangbo\PycharmProjects>
+
+    3.然后打开pycharm去导入项目进来
+        在items.py中定义爬取的东西
+        import scrapy
+        创建容器来容纳它：
+        class DangdangItem(scrapy.Item):
+            # define the fields for your item here like:
+            # name = scrapy.Field()
+            # pass
+             创建容器来容纳它： 如title  link  comment可以自定义，但与其它文件要对应
+            创建title字段，专门存储：标题，scrapy.Field()固定格式
+            title = scrapy.Field()
+            专门存储：链接
+            link = scrapy.Field()
+            专门存储：评论
+            comment = scrapy.Field()
+
+    4.编写爬虫文件  就是最开始创建的dd.py    E:\tangbo\PycharmProjects>scrapy genspider -t basic dd dangdang.com
+    # -*- coding: utf-8 -*-
+    import scrapy
+    #导入模块
+   import scrapy
+    #导入模块
+    from dangdang.items import DangdangItem
+
+    class DdSpider(scrapy.Spider):
+    name = 'dd'
+    allowed_domains = ['dangdang.com']
+    start_urls = ['http://category.dangdang.com/pg1-cid4008150.html']  抓取的开始网站
+                    #所有的信息都在网页的相应response中
+    def parse(self, response):
+        #pass
+        #实例化这个项目
+        item = DangdangItem()
+        #已经爬取了首页，所有的信息都存储在response中，提取信息需要调用xpath去匹配，extract()解压缩
+        item["title"] = response.xpath("//a[@name='itemlist-title']/@title").extract()
+        #关键点在与xpath表达式怎么写  取所有的a标签//定位使用@name='itemlist-title'
+        item["link"] = response.xpath("//a[@name='itemlist-title']/@href").extract()
+        item["comment"] = response.xpath("//a[@name='itemlist-review']/text()").extract()
+        yield item
+        #将数据提交到pipelines中，提交item这个数据
+                                 #--nolog是不显示日志信息
+    5.运行测试：  scrapy crawl dd --nolog          必须在项目目录下运行
+
+    6.piplines.py  默认是关闭的，需要开启，打开settings里面的注释
+    ITEM_PIPELINES = {
+   'dangdang.pipelines.DangdangPipeline': 300,
+}
+
+     7.提交到piplines来看看效果如何
+     class DangdangPipeline(object):
+    def process_item(self, item, spider):
+        for i in range(0,len(item["title"])):
+            title = item["title"][i]
+            link = item["link"][i]
+            comment = item["comment"][i]
+            print("标题 %s---链接 %s---评论 %s" %(title,link,comment))
+        return item
+
+     E:\tangbo\PycharmProjects\dangdang>scrapy crawl dd --nolog  执行看看效果
+         标题  欧美街拍2017大码女装纯棉 连衣裙夏装时尚韩版宽松加大码条纹短袖中长款 ---链
+        接 http://product.dangdang.com/1256423790.html---评论 39条评论
+        标题  米衣连圆领小脚系蝴蝶结短袖t恤女装韩版夏装新款宽松休闲上衣体恤衫时尚潮 ---
+        链接 http://product.dangdang.com/1207149995.html---评论 0条评论
+        标题  森马短袖T恤女2017夏装新款半袖上衣印花韩版学生百搭休闲字母 ---链接 http://p
+        roduct.dangdang.com/1137042695.html---评论 1条评论
+        标题  欧莎女装2017春女春季新品英文字母印花丝绒卫衣上衣S117A32004 ---链接 http://
+        product.dangdang.com/1057193386.html---评论 0条评论
+        标题  2017夏装新款韩版宽松字母印花纯棉竹节棉大码短袖T恤女装上衣 ---链接 http://p
+        roduct.dangdang.com/1184601380.html---评论 3条评论
+
+
+     8.最后写入到数据库里面了。
+     mysql> use scrapy
+        Database changed
+        mysql> show tables;
+        Empty set (0.00 sec)
+
+        mysql> create table dangdang(
+            -> id int(30) auto_increment primary key,
+            -> title varchar(200),
+            -> link varchar(100) unique,
+            -> comment varchar(100));
+        Query OK, 0 rows affected (0.38 sec)
+
+        mysql> desc dangdang;
+        +---------+--------------+------+-----+---------+----------------+
+        | Field   | Type         | Null | Key | Default | Extra          |
+        +---------+--------------+------+-----+---------+----------------+
+        | id      | int(30)      | NO   | PRI | NULL    | auto_increment |
+        | title   | varchar(200) | YES  |     | NULL    |                |
+        | link    | varchar(100) | YES  | UNI | NULL    |                |
+        | comment | varchar(100) | YES  |     | NULL    |                |
+        +---------+--------------+------+-----+---------+----------------+
+        4 rows in set (0.03 sec)
+
+        mysql>
+
+        import pymysql
+
+class DangdangPipeline(object):
+    def process_item(self, item, spider):
+        #连接数据库
+        conn = pymysql.connect(host="192.168.0.200",user="root",passwd="111111",db="scrapy",charset='UTF8')
+        for i in range(0,len(item["title"])):
+            title = item["title"][i]
+            link = item["link"][i]
+            comment = item["comment"][i]
+            #print("标题 %s---链接 %s---评论 %s" %(title,link,comment))
+            sql="insert into dangdang(title,link,comment) VALUES('"+title+"','"+link+"','"+comment+"')"
+            cursor = conn.cursor()
+            cursor.execute(sql)
+            conn.commit()
+            #print(sql1)
+        conn.close()
+        return item
+
+     执行写入：   E:\tangbo\PycharmProjects\dangdang>scrapy crawl dd --nolog
+
+

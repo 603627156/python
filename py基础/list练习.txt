@@ -1,0 +1,126 @@
+#求len、max、min 三个操作
+#求列表中有多少个元素
+# arr = [1,2,3,4,5,6,7,8,9,11,22,31,1,2,33,44,66,77]
+# print(len(arr)) #len方法
+# print('*'*100)
+# print(max(arr))
+# print('*'*100)
+# print(min(arr))
+####################################################
+# arr = [1,2,3,4,5,6,7,8,9,11,22,31,1,2,33,44,66,77]
+# num = 0
+# for i in arr:
+#     num = num + 1
+# print(num)
+
+#练习   实现append功能
+arr = [1,2,3,4,5,6,7]
+a = input('p:')
+arr[-1:] = [a]
+print(arr)
+
+
+list 八大常用方法：
+(1) append 向list里面追加元素
+    没有返回值，修改原list
+    arr =[1,2,3,4,10]
+    arr.append(55)
+    print(arr)
+    运行结果：[1, 2, 3, 4, 10, 55]
+
+
+（2）count 统计list中某个元素出现的次数
+    count 有返回值
+    arr =[1,2,3,4,10,2]
+    a = arr.count(2)
+    print(a)
+    运行结果：2
+
+    求这个序列里面，每一个字符出现的次数
+    # cou = 0
+    # for i in list:
+    #     if  i == 'js':
+    #         cou = cou +1
+    # print(cou)
+（3）extend 扩展原列表  extend 没有返回值，修改原list
+    a = [1,'renchuan',2,3]
+    b = [4,5,6,'tagbo']
+    a.extend(b)
+    print(a)
+    运行结果：
+    a = [1, 'renchuan', 2, 3, 4, 5, 6, 'tagbo']
+    b = [4, 5, 6, 'tagbo']
+（4）index 从列表中找出某个值，返回第一个匹配项的索引位置
+    a = [1,'renchuan',2,3,2,3,2,'renchuan']
+    b = [4,5,6,'tagbo']
+    print(a.index(2))
+    print(a.index('renchuan'))
+    运行结果：
+    2  号索引位置
+    1  号索引位置
+
+（5）insert  插队
+    a = [1,'renchuan',2,3,2,3,2,'renchuan']
+    a.insert(2,'two')
+    a.insert(10,'ten')
+    print(a)
+    运行结果：
+    [1, 'renchuan', 'two', 2, 3, 2, 3, 2, 'renchuan', 'ten']
+（6）pop  弹出 根据索引移除list中的元素，并且返回，默认删除最后一个
+        不传参数的话，和append正好相反
+        a = [1,'renchuan',2,3,2,3,2,'renchuan']
+        a.pop()
+        print(a)
+        运行结果：
+        [1, 'renchuan', 2, 3, 2, 3, 2]
+        传入参数：注意，此参数时索引号
+        a = [1,'renchuan',2,3,2,3,2,'renchuan']
+        a.pop(1)  1是索引号
+        print(a)
+        运行结果： 第一个renchuan被删除
+        [1, 2, 3, 2, 3, 2, 'renchuan']
+（7）remove  移除指定的一个，只删除匹配的第一个，修改原list
+    有硬伤，就是key不存在，代码会报错
+    a = [1,'renchuan',2,3,2,3,2,'renchuan']
+    a.remove('renchuan')
+    print(a)
+    运行结果：
+    [1, 2, 3, 2, 3, 2, 'renchuan']
+（8）reverse  反向排列
+    a = [1,'renchuan',2,3,2,3,2,'renchuan']
+    a.reverse()
+    print(a)
+    运行结果：
+    ['renchuan', 2, 3, 2, 3, 2, 'renchuan', 1]
+模拟：自己写个反转
+    a = [1,'renchuan',2,3,2,3,2,'renchuan']
+    all = []
+    while len(a)>0:
+        all.append(a.pop())
+    print(all)
+
+############################################################
+任务:实现队列和栈  ，先入先出（就是一头进数据，一头取数据）
+进来的时候append
+出去的时候pop(0)
+
+arr =[]
+while True:
+    action = input('Input your action:')
+    if action=='add':
+        detail = input('you zi fu：')
+        arr.append(detail)
+        print(arr)
+    elif action=='do':
+        if len(arr) == 0:
+            break
+        print(arr.pop(0))
+
+#练习，数组去重复
+a = [1,2,3,5,6,7,1,2,3,55,66,22,11,55,66,44,3,2,55]
+b =[]
+for i in a:
+    if i not in b:
+        b.append(i)
+b.sort()
+print(b)

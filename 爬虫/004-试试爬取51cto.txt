@@ -1,0 +1,38 @@
+简单的爬虫很简单，使用urllib即可，爬区51cto
+ （1）爬取左侧导航：
+  <!-- 左侧导航 -->
+  <div class="Side_right_bg" id="Side_list">
+    <div class="Side_right">
+          <a href="#nav0">系统/运维</a>
+          <a href="#nav1">云计算</a>
+          <a href="#nav2">大数据</a>
+          <a href="#nav3">Web开发</a>
+          <a href="#nav4">编程语言</a>
+          <a href="#nav5">软件研发</a>
+          <a href="#nav6">考试认证</a>
+          <a href="#nav7">数据库</a>
+          <a href="#nav8">网络/安全</a>
+          <a href="#nav9">人工智能</a>
+          <a href="#nav10">移动开发</a>
+          <a href="#nav11">游戏开发</a>
+          <a href="#nav12">嵌入式</a>
+          <a href="#nav13">服务器</a>
+          <a href="#nav14">企业信息化</a>
+          <a href="#nav15">Office办公</a>
+          <a href="#nav16">产品/设计</a>
+          <a href="#nav17">其它</a>
+        </div>
+  </div>
+（2）代码
+    import urllib.request   导入 urllib.request 莫模块（自带模块）
+    import re   导入正则表达式模块（自带）
+                打开需要爬取得网址                         读取它，设定字符编码为utf-8
+    index = urllib.request.urlopen("http://edu.51cto.com").read().decode("utf-8")
+    #print(index)
+    开始匹配             任意数据  匹配任意字符
+    data = '<a href="#nav\d.*?">(\S*?)</a>'
+          编译，查找它
+    res = re.compile(data).findall(index)
+    print(res)
+
+运行结果：['系统/运维', '云计算', '大数据', 'Web开发', '编程语言', '软件研发', '考试认证', '数据库', '网络/安全', '人工智能', '移动开发', '游戏开发', '嵌入式', '服务器', '企业信息化', 'Office办公', '产品/设计', '其它']

@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Time    : 2017/5/29 9:45
+# @Author  : tangbo
+# @Site    : 
+# @File    : 002-正则表达式实战.py
+# @Software: PyCharm
+
+# # 原子
+# import re
+# str = 'tangbo renchuan tangbowen'
+# pth = '\n'
+# #搜索函数，需要搜索的内容  原始内容
+# res = re.search(pth,str)
+# print(res)
+#
+#
+#
+# import re
+# str = 'tangborenchuan1521tangbowen'
+# pth = '\d\d\d\d\w'
+# #搜索函数，需要搜索的内容  原始内容
+# res = re.search(pth,str)
+# print(res)
+#
+#
+# import re
+# str = 'tangborenchuan1521tangbowen'
+# pth = 'tang[uqb  jnm j hmkm l,kkjvcbv]o'
+# #搜索函数，需要搜索的内容  原始内容
+# res = re.search(pth,str)
+# print(res)
+#
+# import re
+# string = 'Tangborenchuan152cangbowen'
+# pth = 'tang'
+# #搜索函数，需要搜索的内容  原始内容
+# res = re.search(pth,string,re.I)
+# print('#*80',res)
+#
+# import re
+# string = 'Tangborenchuan152cangbowen'
+# pth = 't.*?o'
+# #搜索函数，需要搜索的内容  原始内容
+# res = re.search(pth,string,re.I)
+# print(res)
+
+import re
+string = "<a href='ftp://www.baidu.com'>百度首页</a>"
+pth = "[a-zA-Z]+://[^\s]*[.com|.cn]"
+res = re.compile(pth).findall(string)
+print(res)
+
+string = "jshdjsdh021-88273657dskhdsk0232-2838732"
+pat = "\d{3}-\d{8}|\d{4}-\d{7}"
+res = re.compile(pat).findall(string)
+print(res)

@@ -1,0 +1,86 @@
+（1）简单定义：scrapy通用性爬虫项目的开发
+        urllib库适合写爬虫文件，而scrapy更适合写爬虫项目。
+        urllib开发效率不高，稳定性也不太好的！
+
+（2）Scrapy框架安装-------难点解决技巧
+     Scrapy框架安装步骤：
+     1.开个VPN--方便访问国外或者采用下载到本地的安装方式
+
+     2.首先：升级pip：   python -m pip install --upgrade pip（建议网络升级安装）
+        C:\Users\Administrator>python -m pip install --upgrade pip
+     3.安装wheel  （建议网络安装）
+        C:\Users\Administrator>pip install wheel
+        Collecting wheel
+          Downloading wheel-0.29.0-py2.py3-none-any.whl (66kB)
+            45% |██████████████▊                 | 30kB 337kB/s eta 0:00
+            61% |███████████████████▋            | 40kB 227kB/s eta
+            76% |████████████████████████▌       | 51kB 275kB/
+            91% |█████████████████████████████▍  | 61kB 3
+            100% |████████████████████████████████| 71k
+         319kB/s
+        Installing collected packages: wheel
+        Successfully installed wheel-0.29.0
+        C:\Users\Administrator>             cp35代表的是py便便  64位
+     4.安装lxml（一定是下载安装）  lxml?3.7.3?cp35?cp35m?win_amd64.whl
+        下载：百度搜索：lfd python  http://www.lfd.uci.edu/~gohlke/pythonlibs/
+        注意：该安装要进入到下载的目录下安装： http://www.lfd.uci.edu/~gohlke/pythonlibs/#lxml
+            E:\python3.5>pip install lxml-3.7.3-cp35-cp35m-win_amd64.whl
+            Processing e:\python3.5\lxml-3.7.3-cp35-cp35m-win_amd64.whl
+            Installing collected packages: lxml
+            Successfully installed lxml-3.7.3
+        验证：
+        >>> import lxml  导入不报错，则成功
+        >>>
+
+     5.安装Twisted（一定是下载安装）
+        E:\python3.5>pip install Twisted-17.1.0-cp35-cp35m-win_amd64.whl
+        Processing e:\python3.5\twisted-17.1.0-cp35-cp35m-win_amd64.whl
+        Collecting constantly>=15.1 (from Twisted==17.1.0)
+          Downloading constantly-15.1.0-py2.py3-none-any.whl
+        Collecting Automat>=0.3.0 (from Twisted==17.1.0)
+          Downloading Automat-0.6.0-py2.py3-none-any.whl
+        Collecting zope.interface>=4.0.2 (from Twisted==17.1.0)
+          Downloading zope.interface-4.4.1-cp35-cp35m-win_amd64.whl (138kB)
+            44% |██████████████▏                 | 61kB 682kB/s eta 0:00:
+            51% |████████████████▌               | 71kB 754kB/s eta 0:0
+            59% |███████████████████             | 81kB 460kB/s eta 0
+            66% |█████████████████████▎          | 92kB 506kB/s et
+            73% |███████████████████████▋        | 102kB 550kB/s
+            81% |██████████████████████████      | 112kB 538kB
+            88% |████████████████████████████▍   | 122kB 38
+            95% |██████████████████████████████▊ | 133kB
+            100% |████████████████████████████████| 143k
+
+            >>> import twisted 验证是否成功
+
+     6.pip install scrapy 或者pip install scrapy==1.1.0rc3（建议网络安装）
+     E:\python3.5>pip install scrapy
+        Collecting scrapy
+          Downloading Scrapy-1.4.0-py2.py3-none-any.whl (248kB)
+            41% |█████████████▏                  | 102kB 150kB/s eta 0:00:
+            45% |██████████████▌                 | 112kB 167kB/s eta 0:00
+            49% |███████████████▉                | 122kB 172kB/s eta 0:0
+            53% |█████████████████▏              | 133kB 169kB/s eta 0
+            57% |██████████████████▍             | 143kB 194kB/s eta
+            61% |███████████████████▊            | 153kB 336kB/s eta
+            65% |█████████████████████           | 163kB 290kB/s et
+            69% |██████████████████████▍         | 174kB 290kB/s
+            74% |███████████████████████▊        | 184kB 279kB/s
+
+            >>> import scrapy  验证是否成功
+     7.安装pywin32-221-cp35-cp35m-win_amd64.whl
+     E:\python3.5>pip install pywin32-221-cp35-cp35m-win_amd64.whl
+        Processing e:\python3.5\pywin32-221-cp35-cp35m-win_amd64.whl
+        Installing collected packages: pywin32
+        Successfully installed pywin32-221
+
+        E:\python3.5>
+
+        遇到win32-apimok错误
+          负责py安装文件下面的：\Python35\Lib\site-packages\pywin32_system32
+
+        里面的所有的文件复制到：C:\Windows\System32
+
+        现在，问题解决。无需重新打开DOS窗口，直接执行：scrapy bench。
+
+        输出正常：

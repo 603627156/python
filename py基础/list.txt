@@ -1,0 +1,104 @@
+一、索引：
+    定义变量 [开始，结尾] 中间用，号，字符号要引起来
+    arr =['c','js','python','css','js','html','node','js','python','css','js']
+    help(arr)  查找帮助
+    print(arr)   打印列表
+    print(arr[0])   取第一个元素
+    print(arr[10])   取第10个元素
+    print(arr[-1])   取最后一个元素
+    print(arr[-5])   取倒数第五个元素
+
+print(list('hellp'))  把字符串转换成列表
+    运行结果:['h', 'e', 'l', 'l', 'p']
+
+二、切片   **********很重要***************
+    arr =['c','js','python','css','js','html','node']
+    print(arr[0])    取0号索引
+    print(arr[0:3])  取0到3号位置
+    print(arr[-1])   取最后一个
+    print(arr[-5:-1])  取倒数第5个到倒数第一个
+    print(arr[5:])     取5以后的， ：号两边的可以省略，省略就是后面的全取
+    print(arr[1:8:2])   可以间隔去取值
+
+    运行结果：
+    c
+    ['c', 'js', 'python']
+    node
+    ['python', 'css', 'js', 'html']
+    ['html', 'node']
+    ['js', 'css', 'html']
+#############################################################
+    切片可以赋值：
+    arr =['c','js','python','css','js','html','node']
+    arr[2:6]=['bowen',3389]   把2-6号索引替换为后面的列表
+    print(arr)
+
+    arr =['c','js','python','css','js','html','node']
+    arr[1:1]=['bowen',3389]  插入元素
+    print(arr)
+    arr[2:5] = []            2-5号索引换成空
+    print(arr)
+
+    ###############
+    切片实现append功能
+    arr = [1,2,3,4,5,6,7]
+    a = input('p:')
+    arr[-1:] = [a]
+    print(arr)
+
+
+三、遍历
+    arr =['c','js','python','css','js','html','node','js','python','css','js']
+    for i in arr:   每次从arr里面取值，对它进行遍历或者操作
+        print(i)
+
+四、判断是否存在
+    arr =['c','js','python','css','js','html','node','js','python','css','js']
+    print('js' in arr)
+    运行结果：True
+
+
+五、#求len、max、min 三个操作
+    #求列表中有多少个元素
+    arr = [1,2,3,4,5,6,7,8,9,11,22,31,1,2,33,44,66,77]
+    print(len(arr)) #len方法
+    print('*'*100)
+    print(max(arr))  求列表的最大值
+    print('*'*100)
+    print(min(arr))  求列表的最小值
+运行结果：
+         18
+        ****************************************************************************************************
+         77
+        ****************************************************************************************************
+          1
+自己实现求列表中有多少个元素：
+          arr = [1,2,3,4,5,6,7,8,9,11,22,31,1,2,33,44,66,77]
+          num = 0
+            for i in arr:
+                num = num + 1
+            print(num)
+六、删除操作
+    arr = [1,2,3,4,5,6,7,8,9,11,22,31,1,2,33,44,66,77]
+    del arr[0]  根据索引号来删除的
+    print(arr)
+
+七、做加法和乘法
+    arr = [1,2,3,4,5,6,7,8,9,11,22,31,1,2,33,44,66,77]
+    arr1 = arr + ['tangbi','chensi']
+    print(arr1)
+    运行结果：
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 31, 1, 2, 33, 44, 66, 77, 'tangbi', 'chensi']
+
+    arr = [1,2,3,4,5,6,7,8,9,11,22,31,1,2,33,44,66,77]
+    print(arr*2)
+
+八、修改值
+    修改值：
+    arr =['c','js','python','css','js','html','node']
+    arr[0] = 'renchuan'   根据索引编号来修改值
+    arr[-1] = 'tangbo'
+    print(arr)
+    运行结果：['renchuan', 'js', 'python', 'css', 'js', 'html', 'tangbo']
+
+

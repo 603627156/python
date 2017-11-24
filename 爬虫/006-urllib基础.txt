@@ -1,0 +1,57 @@
+一、urllib基础：
+
+    （1）urllib：爬虫模块，简单的脚本实现（细节需要自己处理）  大型项目的还是使用框架scrapy框架
+     常见urllib模块方法： 首先需要导入模块import urllib.request
+       1.urlretrieve()  作用：直接下载网页到本地,urlretrieve(参数一代表网址,参数二代表本地文件的存储地址)
+         案例：
+            import urllib.request
+            ############################参数一，网址               参数二，存储的路径
+            urllib.request.urlretrieve('http://www.ctspcl.com','test.html')
+
+       2.urlcleanup()  作用：清除爬虫产生的缓存，可以提高运行速度!!
+            import urllib.request
+            urllib.request.urlretrieve('http://www.ctspcl.com','test.html')
+            urllib.request.urlcleanup()   #直接放到下面就可以清除缓存
+
+       3.info()   作用：获取当前爬取得情况
+         看info()相关的简介信息：
+            file = urllib.request.urlopen('http://www.ctspcl.com')
+            print(file.info())
+            运行结果：
+                E:\python3.5\python.exe E:/tangbo/PycharmProjects/s12/爬虫/004-urllib库.py
+                Server: cts 1.0
+                Date: Mon, 29 May 2017 06:27:21 GMT
+                Content-Type: text/html
+                Content-Length: 10982
+                Last-Modified: Mon, 10 Apr 2017 09:58:18 GMT
+                Connection: close
+                ETag: "58eb573a-2ae6"
+                Accept-Ranges: bytes
+
+       4.getcode()   输出当前的状态码
+            file = urllib.request.urlopen('http://www.ctspcl.com')
+            print(file.getcode())
+            运行结果：
+                200
+
+       5.geturl() 获取当前页面爬取得url地址
+           file = urllib.request.urlopen('http://www.ctspcl.com')
+           print(file.geturl())
+           运行结果：http://www.ctspcl.com
+
+    （2）超时设置 由于系统，网络的影响，网页服务器长时间未响应，我们就需要去判断超时时间。
+         例如：设置timeout超时设置
+          for i in range(0,100):
+                try:
+                    file = urllib.request.urlopen('http://www.ctspcl.com',timeout=1)
+                    print(len(file.read().decode("utf-8","ignore")))
+                except Exception as err:
+                    print("出现异常！")
+
+
+    （3）自动模拟http请求*****很重要
+         客户端如果要与服务器端进行通信，需要通过http请求进行，http请求有很多种。
+         我们主要研究post与get两种请求方式：比如登录、搜索某些信息
+         get请求：
+
+         post请求：
