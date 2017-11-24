@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Tangbo | Devops自动化运维平台</title>
+  <link rel="stylesheet" href="../static/css/layui.css">
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css" >
+  <link rel="stylesheet" href="../static/font/Font-Awesome-master/css/font-awesome.min.css">
+      <!--<内存插件>-->
+    <script src="../static/lib/jquery-1.8.3.min.js"></script>
+  <!--<script>var jquery183 = jQuery.noConflict( true );</script>-->
+    <script src="../static/lib/highcharts-zh_CN.js"></script>
+    <script src="../static/lib/exporting.js"></script>
+    <script src="../static/lib/highcharts.js"></script>
+    <!--datatable--><!--plugins-->
+  <link href="../static/css/style.css" rel="stylesheet">
+  <!--<script src="../static/js/jquery-2.1.1.js"></script>-->
+  <!--<script src="../static/js/jquery-2.1.1.js"></script>-->
+  <!--引用后前端内存数据会不在-->
+
+  <script src="../static/js/bootstrap.min.js"></script>
+  <script src="../static/pulgin/sweetalert-master/dist/sweetalert.min.js"></script>
+  <script src="../static/pulgin/datatable/dataTables.min.js"></script>
+  <link href="../static/pulgin/datatable/dataTables.min.css" rel="stylesheet">
+  <script src="../static/pulgin/multiselect/bootstrap-multiselect.js"></script>
+  <script src="../static/pulgin/sweetalert-master/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../static/pulgin/sweetalert-master/dist/sweetalert.css">
+  <!--验证登录信息-->
+   <script src="../static/js/Validform_v5.3.2_min.js"></script>
+    <link href="" rel="stylesheet">
+      <style type="text/css">
+            .Validform_right {color:green}
+            .Validform_wrong {color:red}
+        </style>
+
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <!--#####################导航开始##################################-->
+    <div class="layui-logo"><img src="../static/images/logo.png" width="55%" height="55%" style="float: left;margin-top:12px" /><a style="text-decoration:none" href="/">运维系统</a></div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <ul class="layui-nav layui-layout-left">
+      <li class="layui-nav-item"><a style="text-decoration:none" href="http://192.168.20.157:8080/">基础监控</a></li>
+      <li class="layui-nav-item"><a style="text-decoration:none" href="http://192.168.6.250:28080/">业务监控</a></li>
+      <li class="layui-nav-item"><a style="text-decoration:none" href="http://ctspcl.com/">公司官网</a></li>
+      <li class="layui-nav-item">
+        <a href="javascript:;">其它系统</a>
+        <dl class="layui-nav-child">
+          <dd><a href="">邮件管理</a></dd>
+          <dd><a href="">短信管理</a></dd>
+          <dd><a href="">授权管理</a></dd>
+        </dl>
+      </li>
+    </ul>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item">
+        <a style="text-decoration:none" href="javascript:;">
+            <!--获取登录图片 -->
+          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+            <!--获取当前登录用户名-->
+            {{ username }}
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="">基本资料</a></dd>
+          <dd><a href="">安全设置</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item"><a style="text-decoration:none" href="/login/">退出登录</a></li>
+    </ul>
+  </div>
+  <!--#####################导航完成##################################-->
+
+   <!--#####################左侧区域开始##################################-->
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+        <!--加上此参数，前端可以默认展开layui-nav-itemed-->
+        <li class="layui-nav-item layui-nav-itemed">
+          <a style="text-decoration:none"  href="javascript:;"><i class="fa fa-gitlab "></i>&nbsp;&nbsp;用户管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href=" ">&nbsp;&nbsp;&nbsp;个人中心</a></dd>
+            <dd><a href="/userlist/">&nbsp;&nbsp;&nbsp;用户列表</a></dd>
+            <dd><a href="/reg/">&nbsp;&nbsp;&nbsp;用户注册</a></dd>
+            <!--<dd><a href="">超链接</a></dd>-->
+          </dl>
+        </li>
+
+        <li class="layui-nav-item">
+          <a style="text-decoration:none" href="javascript:;"><i class="fa fa-glass"></i>&nbsp;&nbsp;资产管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">&nbsp;&nbsp;&nbsp;机房管理</a></dd>
+            <dd><a href="javascript:;">&nbsp;&nbsp;&nbsp;机柜管理</a></dd>
+            <dd><a href="javascript:;">&nbsp;&nbsp;&nbsp;服务器管理</a></dd>
+            <dd><a href="javascript:;">&nbsp;&nbsp;&nbsp;电脑管理</a></dd>
+            <dd><a href="/record/">&nbsp;&nbsp;&nbsp;录音管理</a></dd>
+            <!--<dd><a href="">超链接</a></dd>-->
+          </dl>
+        </li>
+
+        <li class="layui-nav-item">
+          <a style="text-decoration:none" href="javascript:;"><i class="fa fa-inbox"></i>&nbsp;&nbsp;网络管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">&nbsp;&nbsp;&nbsp;路由器</a></dd>
+            <dd><a href="javascript:;">&nbsp;&nbsp;&nbsp;交换机</a></dd>
+            <dd><a href="javascript:;">&nbsp;&nbsp;&nbsp;防火墙</a></dd>
+            <dd><a href="javascript:;">&nbsp;&nbsp;&nbsp;专线管理</a></dd>
+            <!--<dd><a href="">超链接</a></dd>-->
+          </dl>
+        </li>
+
+         <li class="layui-nav-item">
+          <a style="text-decoration:none" href="javascript:;"><i class="fa fa-inbox"></i>&nbsp;&nbsp;工单管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="/jobadd/">&nbsp;&nbsp;&nbsp;工单申请</a></dd>
+            <dd><a href="/joblist/">&nbsp;&nbsp;&nbsp;申请列表</a></dd>
+            <dd><a href="/jobhistory/">&nbsp;&nbsp;&nbsp;历史工单</a></dd>
+            <!--<dd><a href="">超链接</a></dd>-->
+          </dl>
+        </li>
+
+
+        <li class="layui-nav-item">
+          <a style="text-decoration:none" href="javascript:;"><i class="glyphicon glyphicon-cog"></i>&nbsp;&nbsp;运维发布</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:;">&nbsp;&nbsp;&nbsp;Git打包</a></dd>
+            <dd><a href="javascript:;">&nbsp;&nbsp;&nbsp;发布配置</a></dd>
+            <dd><a href="javascript:;">&nbsp;&nbsp;&nbsp;重启服务</a></dd>
+            <!--<dd><a href="">超链接</a></dd>-->
+          </dl>
+        </li>
+        <li class="layui-nav-item"><a href="https://www.aliyun.com/"><i class="fa fa-inbox"></i>&nbsp;&nbsp;阿里云</a></li>
+        <li class="layui-nav-item"><a href="http://192.168.20.157/"><i class="glyphicon glyphicon-cog"></i>&nbsp;&nbsp;后台管理</a></li>
+      </ul>
+    </div>
+  </div>
+  <!--#####################左侧区域结束##################################-->
+   <!-- 模板继承开始 -->
+  <div class="layui-body">
+    <!-- 内容主体区域 -->
+    {% block content%}
+    {% endblock%}
+  </div>
+  <!-- 模板继承结束 -->
+  <!-- 底部固定区域开始 -->
+  <div  class="layui-footer">
+    <p  class="m-t"> <small><b>Copyright</b> Tangbo © 2017-2018</small> </p>
+  </div>
+  <!-- 底部固定区域结束 -->
+</div>
+<script src="../static/js/layui.js"></script>
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+});
+</script>
+<script>
+
+        $("#userForm").Validform({
+                tiptype:3
+        })
+</script>
+</body>
+</html>

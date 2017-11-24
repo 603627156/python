@@ -1,0 +1,122 @@
+{% extends "index.html" %}
+{% block content%}
+    <!--index表格-->
+    <blockquote class="layui-elem-quote">
+    </blockquote>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+      <legend>当前系统信息</legend>
+</fieldset>
+
+<div class="layui-form">
+  <table  class="layui-table">
+    <colgroup>
+      <col width="150">
+      <col width="150">
+      <col width="200">
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th>系统名称</th>
+        <th>当前版本</th>
+        <th>IP地址</th>
+        <th>运行时长</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tangbo&reg;运维管理控制系统</td>
+        <td>2017.10.29.v1.0</td>
+        <td>192.168.6.250</td>
+        <td>21天22小时46分50秒</td>
+      </tr>
+    </tbody>
+</table>
+    <!--index内存走势图开始-->
+    <div style="padding: 25px;">实时展示区域</div>
+    <div id="container" style="width: 30%;height: 300px;"></div>
+    <script type="text/javascript">
+    var data = '{{ local_data|tojson }}';
+
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: '192.168.6.250-本机内存使用率走势图'
+            },
+//            subtitle: {
+//                text: document.ontouchstart === undefined ?
+//                '鼠标拖动可以进行缩放' : '手势操作进行缩放'
+//            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    millisecond: '%H:%M:%S.%L',
+                    second: '%H:%M:%S',
+                    minute: '%H:%M',
+                    hour: '%H:%M',
+                    day: '%m-%d',
+                    week: '%m-%d',
+                    month: '%Y-%m',
+                    year: '%Y'
+                }
+            },
+            tooltip: {
+                dateTimeLabelFormats: {
+                    millisecond: '%H:%M:%S.%L',
+                    second: '%H:%M:%S',
+                    minute: '%H:%M',
+                    hour: '%H:%M',
+                    day: '%Y-%m-%d',
+                    week: '%m-%d',
+                    month: '%Y-%m',
+                    year: '%Y'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: '本机内存使用率'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 2
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
+            series: [{
+                type: 'area',
+                name: '内存使用率',
+                data: (eval(data))
+            }]
+          });
+        });
+       </script>
+ <!--内存走势图结束-->
+    </div>
+{% endblock%}
